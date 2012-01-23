@@ -1,0 +1,57 @@
+log.sh
+======
+
+**log.sh** is a Bash library for easy logging with preset configurations.
+
+Example
+-------
+
+Please run the `example.sh`.
+
+Usage
+-----
+
+    source /path/to/log.sh
+    # You are good to go
+    LSERROR Test error message
+
+## Logging levels
+
+    LS_DEBUG_LEVEL=10
+    LS_INFO_LEVEL=20
+    LS_WARNING_LEVEL=30
+    LS_ERROR_LEVEL=40
+    LS_CRITICAL_LEVEL=50
+
+The default logging level is `LS_WARNING_LEVEL` and the value is stored at `LS_LEVEL`. If you need debug or info message, set `LS_LEVEL` to them.
+
+## Default levels logging functions
+
+    LSDEBUG
+    LSINFO
+    LSWARNING
+    LSERROR
+    LSCRITICAL
+
+All arguments supplied to these function are treated as the message. There is also a general logging function `LSLOG`:
+
+    LSLOG 35 A message for level 35
+
+The first parameter is the the level. You do not need to use preset levels actually, as long as the level is equal to or greater than `LS_LEVEL`, the message will be printed out.
+
+Support
+-------
+
+Please use Issues to request features or to report bugs.
+
+Help
+----
+
+This library is relatively new and many things may not be considered by mistakes, please feel free to fork it and improve it, then open pull requests. Anything, coding, examples, documentaions, ideas, even typo fixing are all welcome.
+
+License
+-------
+
+**log.sh** is licensed under the MIT License, please see COPYING.
+
+    Copyright (c) 2012 Yu-Jie Lin
