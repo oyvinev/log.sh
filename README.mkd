@@ -6,7 +6,9 @@ log.sh
 Example
 -------
 
-Please run the `example.sh`.
+Please run the `example.sh`, the following screenshot was taken from the output of version 0.1.
+
+![Screenshot from v0.1 example.sh](http://1.bp.blogspot.com/-C4ina8EsnG8/Tx11fpAzEcI/AAAAAAAAC_Y/_-9WjbSOZgs/s1600/2012-01-23--22%253A51%253A57.png)
 
 Usage
 -----
@@ -15,7 +17,7 @@ Usage
     # You are good to go
     LSERROR Test error message
 
-## Logging levels
+### Logging levels
 
     LS_DEBUG_LEVEL=10
     LS_INFO_LEVEL=20
@@ -25,7 +27,7 @@ Usage
 
 The default logging level is `LS_WARNING_LEVEL` and the value is stored at `LS_LEVEL`. If you need debug or info message, set `LS_LEVEL` to them.
 
-## Default levels logging functions
+### Default levels logging functions
 
     LSDEBUG
     LSINFO
@@ -38,6 +40,10 @@ All arguments supplied to these function are treated as the message. There is al
     LSLOG 35 A message for level 35
 
 The first parameter is the the level. You do not need to use preset levels actually, as long as the level is equal to or greater than `LS_LEVEL`, the message will be printed out.
+
+### Changing the output target
+
+The default `LS_OUTPUT` is set to `/dev/stdout`, you can change it to `/dev/stderr` or any filename. Note that, it overwrites the file.
 
 Support
 -------
