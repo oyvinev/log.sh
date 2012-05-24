@@ -3,6 +3,13 @@ log.sh
 
 **log.sh** is a Bash library for easy logging with preset configurations.
 
+Installation
+------------
+
+    make install
+
+You can also use `PREFIX=$HOME` to install `log.sh` to `~/bin`, or any other location.
+
 Example
 -------
 
@@ -39,7 +46,7 @@ All arguments supplied to these function are treated as the message. There is al
 
     LSLOG 35 A message for level 35
 
-The first parameter is the the level. You do not need to use preset levels actually, as long as the level is equal to or greater than `LS_LEVEL`, the message will be printed out.
+The first parameter is the level. You do not need to use preset levels actually, as long as the level is equal to or greater than `LS_LEVEL`, the message will be printed out.
 
 ### Changing the output target
 
@@ -53,7 +60,7 @@ Please use Issues to request features or to report bugs.
 Help
 ----
 
-This library is relatively new and many things may not be considered by mistakes, please feel free to fork it and improve it, then open pull requests. Anything, coding, examples, documentaions, ideas, even typo fixing are all welcome.
+This library is relatively new and many things may not be considered by mistakes, please feel free to fork it and improve it, then open pull requests. Anything, coding, examples, documentations, ideas, even typo fixing are all welcome.
 
 License
 -------

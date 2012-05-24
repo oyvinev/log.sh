@@ -20,6 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+LS_VERSION=0.2
+
 LS_OUTPUT=${LS_OUTPUT:-/dev/stdout}
 # XXX need more flexible templating, currently manual padding for level names
 LS_DEFAULT_FMT=${LS_DEFAULT_FMT:-'[$TS][$_LS_LEVEL_STR][${FUNCNAME[1]}:${BASH_LINENO[0]}]'}
