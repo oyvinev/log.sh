@@ -55,6 +55,15 @@ LSERROR Error message
 LSCRITICAL Critical message
 
 echo
+echo "=== Prints 1 to 5 via pipe ==="
+echo " * for ... | LSINFO"
+echo
+
+for i in {1..5}; do
+  echo $i
+done | LSINFO
+
+echo
 echo "=== Prints one message to level 35 ==="
 echo
 LSLOG 35 Message for level 35

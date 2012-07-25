@@ -23,6 +23,8 @@ Usage
     source /path/to/log.sh
     # You are good to go
     LSERROR Test error message
+    # or you can pipe the message
+    echo Test error message via pipe | LSERROR
 
 ### Logging levels
 

@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-LS_VERSION=0.2.1
+LS_VERSION=0.3
 
 LS_OUTPUT=${LS_OUTPUT:-/dev/stdout}
 # XXX need more flexible templating, currently manual padding for level names
@@ -73,8 +73,11 @@ LSLOG () {
   _LS_FIND_LEVEL_STR $LEVEL
   local OUTPUT
   eval "OUTPUT=\"$_LS_LEVEL_FMT\""
+  # if no message was passed, read it from STDIN
+  local _MSG
+  [[ $# -ne 0 ]] && _MSG="$@" || _MSG="$(cat)"
   echo -ne "$_LS_LEVEL_BEGIN$OUTPUT " >> "$LS_OUTPUT"
-  echo -n $@ >> "$LS_OUTPUT"
+  echo -n  "$_MSG"                    >> "$LS_OUTPUT"
   echo -e "$_LS_LEVEL_END" >> "$LS_OUTPUT"
 }
 

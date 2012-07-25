@@ -1,6 +1,10 @@
 CHANGES
 =======
 
+## Version 0.3 (2012-07-25T03:11:17Z)
+
+ * Add pipe support (#2)
+
 ## Version 0.2.1 (2012-07-22T22:36:51Z)
 
  * Fix empty output when redirect to file (#1)
