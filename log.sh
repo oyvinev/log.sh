@@ -76,8 +76,7 @@ LSLOG () {
   # if no message was passed, read it from STDIN
   local _MSG
   [[ $# -ne 0 ]] && _MSG="$@" || _MSG="$(cat)"
-  if [[ "$LS_OUTPUT" = "/dev/stdout" ]]
-  then
+  if [[ "$LS_OUTPUT" = "/dev/stdout" ]] ; then
     echo -ne "$_LS_LEVEL_BEGIN$OUTPUT "
     echo -n  "$_MSG"
     echo -e "$_LS_LEVEL_END"
