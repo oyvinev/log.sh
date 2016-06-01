@@ -76,9 +76,15 @@ LSLOG () {
   # if no message was passed, read it from STDIN
   local _MSG
   [[ $# -ne 0 ]] && _MSG="$@" || _MSG="$(cat)"
-  echo -ne "$_LS_LEVEL_BEGIN$OUTPUT " >> "$LS_OUTPUT"
-  echo -n  "$_MSG"                    >> "$LS_OUTPUT"
-  echo -e "$_LS_LEVEL_END" >> "$LS_OUTPUT"
+  if [[ "$LS_OUTPUT" = "/dev/stdout" ]] ; then
+    echo -ne "$_LS_LEVEL_BEGIN$OUTPUT "
+    echo -n  "$_MSG"
+    echo -e "$_LS_LEVEL_END"
+  else
+    echo -ne "$_LS_LEVEL_BEGIN$OUTPUT " >> "$LS_OUTPUT"
+    echo -n  "$_MSG"                    >> "$LS_OUTPUT"
+    echo -e "$_LS_LEVEL_END" >> "$LS_OUTPUT"
+  fi
 }
 
 shopt -s expand_aliases
