@@ -66,7 +66,7 @@ _LS_FIND_LEVEL_STR () {
 LSLOG () {
   local LEVEL=$1
   shift
-  (( LEVEL < LS_LEVEL )) && return 1
+  (( LEVEL < LS_LEVEL )) && return 0
   local TS=$(date +'%Y-%m-%d %H:%M:%S.%N')
   # Keep digits only up to milliseconds
   TS=${TS%??????}
