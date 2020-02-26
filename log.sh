@@ -80,6 +80,10 @@ LSLOG () {
     echo -ne "$_LS_LEVEL_BEGIN$OUTPUT "
     echo -n  "$_MSG"
     echo -e "$_LS_LEVEL_END"
+  elif [[ "$LS_OUTPUT" = "/dev/stderr" ]] ; then
+    echo -ne "$_LS_LEVEL_BEGIN$OUTPUT " >&2
+    echo -n  "$_MSG" >&2
+    echo -e "$_LS_LEVEL_END" >&2
   else
     echo -ne "$_LS_LEVEL_BEGIN$OUTPUT " >> "$LS_OUTPUT"
     echo -n  "$_MSG"                    >> "$LS_OUTPUT"
