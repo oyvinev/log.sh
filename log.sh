@@ -124,3 +124,16 @@ LSCALLSTACK () {
     # It requires `shopt -s extdebug'
   done
 }
+
+# Error report
+function on_error {
+  LSERROR "Error reported at ${1:-}"
+}
+
+# Exit trap
+function on_exit {
+  code=$?
+  [ $code -eq 0 ] || LSERROR "${1:-}"
+  exit $code
+}
+
