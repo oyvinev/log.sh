@@ -100,11 +100,6 @@ alias LSERROR='LSLOG 40'
 alias LSCRITICAL='LSLOG 50'
 alias LSLOGSTACK='LSDEBUG Traceback ; LSCALLSTACK'
 
-LSEXCEPTION () {
-  LSLOG 50 $@; LSDEBUG Traceback ; LSCALLSTACK 1
-  exit 1
-}
-
 # TODO Log Bash information
 LSLOGBASH () {
   :
@@ -119,13 +114,12 @@ LSLOGUSER () {
 LSCALLSTACK () {
   local i=0
   local FRAMES=${#BASH_LINENO[@]}
-  local OFFSET=${1:-0}
   # FRAMES-2 skips main, the last one in arrays
-  for ((i=FRAMES-2; i>=$OFFSET; i--)); do
+  for ((i=FRAMES-2; i>=0; i--)); do
     echo '  File' \"${BASH_SOURCE[i+1]}\", line ${BASH_LINENO[i]}, in ${FUNCNAME[i+1]}
     # Grab the source code of the line
-    sed -n "${BASH_LINENO[i]}{s/^[ \t]*/    /;p}" "${BASH_SOURCE[i+1]}"
-    # TODO extract arugments from "${BASH_ARGC[@]}" and "${BASH_ARGV[@]}"
+    sed -n "${BASH_LINENO[i]}{s/^/    /;p}" "${BASH_SOURCE[i+1]}"
+    # TODO extract arguments from "${BASH_ARGC[@]}" and "${BASH_ARGV[@]}"
     # It requires `shopt -s extdebug'
   done
 }
