@@ -25,7 +25,8 @@ LS_VERSION=0.3
 LS_OUTPUT=${LS_OUTPUT:-/dev/stdout}
 # XXX need more flexible templating, currently manual padding for level names
 CURRENT_FILE=$(basename $0)
-LS_DEFAULT_FMT=${LS_DEFAULT_FMT:-'[$TS][$_LS_LEVEL_STR][${CURRENT_FILE}:${BASH_LINENO[0]}]'}
+FMT_STRING='[$TS][$_LS_LEVEL_STR][${CURRENT_FILE}:$(printf "%-3d" ${BASH_LINENO[0]})]:'
+LS_DEFAULT_FMT=${LS_DEFAULT_FMT:-$FMT_STRING}
 
 LS_DEBUG_LEVEL=10
 LS_INFO_LEVEL=20
