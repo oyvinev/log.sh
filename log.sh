@@ -25,7 +25,8 @@ LS_VERSION=0.3
 LS_OUTPUT=${LS_OUTPUT:-/dev/stdout}
 # XXX need more flexible templating, currently manual padding for level names
 CURRENT_FILE=$(basename $0)
-LS_DEFAULT_FMT=${LS_DEFAULT_FMT:-'[$TS][$_LS_LEVEL_STR][${CURRENT_FILE}:${BASH_LINENO[0]}]'}
+FMT_STRING='[$TS][$_LS_LEVEL_STR][${CURRENT_FILE}:$(printf "%-3d" ${BASH_LINENO[0]})]:'
+LS_DEFAULT_FMT=${LS_DEFAULT_FMT:-$FMT_STRING}
 
 LS_DEBUG_LEVEL=10
 LS_INFO_LEVEL=20
@@ -100,11 +101,6 @@ alias LSERROR='LSLOG 40'
 alias LSCRITICAL='LSLOG 50'
 alias LSLOGSTACK='LSDEBUG Traceback ; LSCALLSTACK'
 
-LSEXCEPTION () {
-  LSLOG 50 $@; LSDEBUG Traceback ; LSCALLSTACK 1
-  exit 1
-}
-
 # TODO Log Bash information
 LSLOGBASH () {
   :
@@ -119,13 +115,25 @@ LSLOGUSER () {
 LSCALLSTACK () {
   local i=0
   local FRAMES=${#BASH_LINENO[@]}
-  local OFFSET=${1:-0}
   # FRAMES-2 skips main, the last one in arrays
-  for ((i=FRAMES-2; i>=$OFFSET; i--)); do
+  for ((i=FRAMES-2; i>=0; i--)); do
     echo '  File' \"${BASH_SOURCE[i+1]}\", line ${BASH_LINENO[i]}, in ${FUNCNAME[i+1]}
     # Grab the source code of the line
-    sed -n "${BASH_LINENO[i]}{s/^[ \t]*/    /;p}" "${BASH_SOURCE[i+1]}"
-    # TODO extract arugments from "${BASH_ARGC[@]}" and "${BASH_ARGV[@]}"
+    sed -n "${BASH_LINENO[i]}{s/^/    /;p}" "${BASH_SOURCE[i+1]}"
+    # TODO extract arguments from "${BASH_ARGC[@]}" and "${BASH_ARGV[@]}"
     # It requires `shopt -s extdebug'
   done
 }
+
+# Error report
+function on_error {
+  LSERROR "Error reported at ${1:-}"
+}
+
+# Exit trap
+function on_exit {
+  code=$?
+  [ $code -eq 0 ] || LSERROR "${1:-}"
+  exit $code
+}
+
